@@ -1,0 +1,22 @@
+[
+    {
+      "ParameterKey": "KeyName",
+      "ParameterValue": "your-existing-key-name"
+    }, 
+    {
+      "ParameterKey": "VpcId",
+      "ParameterValue": "vpc id of your existing vpc"
+    },
+    {
+      "ParameterKey": "Subnets",
+      "ParameterValue": "subnet-1, subnet-2"
+    },
+    {
+      "ParameterKey": "DBUser",
+      "ParameterValue": "dbusername"
+    },
+    {
+      "ParameterKey": "DBPassword",
+      "ParameterValue": "dbpasswordname"
+    }
+  ]
