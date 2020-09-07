@@ -1,0 +1,15 @@
+{
+  "Parameters" : {
+    "KeyName" : "your keypair name",
+    "VpcId" : "vpc-id",
+    "Subnets" : "subnet-id",
+    "DBUser" : "db user name",    
+    "DBPassword" : "db password",
+	"DBAllocatedStorage" : "5",
+	"DBInstanceClass" : "db.t2.medium",
+	"DBName" : "db name",
+	"InstanceType": "t2.micro",
+	"MultiAZDatabase": "false",
+	"WebServerCapacity" : "1"
+  }
+}
