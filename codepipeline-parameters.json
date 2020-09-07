@@ -1,0 +1,30 @@
+[
+    {
+      "ParameterKey": "PipelineName",
+      "ParameterValue": "CodePipeline name"
+    }, 
+    {
+      "ParameterKey": "S3Bucket",
+      "ParameterValue": "your S3 bucket name"
+    },
+    {
+      "ParameterKey": "SourceS3Key",
+      "ParameterValue": "zip file name inside the S3 bucket"
+    },
+    {
+      "ParameterKey": "Email",
+      "ParameterValue": "email id for notification"
+    },
+    {
+      "ParameterKey": "TestStackName",
+      "ParameterValue": "Name of the Dev env stack"
+    },
+    {
+      "ParameterKey": "ChangeSetName",
+      "ParameterValue": "prod stack change set name"
+    },
+    {
+      "ParameterKey": "ProdStackName",
+      "ParameterValue": "Name of the Dev env stack"
+    }
+]
