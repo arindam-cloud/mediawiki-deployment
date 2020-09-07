@@ -1,29 +1,43 @@
 # Deployment Steps
 
-This is a Cloudformation Template to automate deployment of the Mediawiki stack.
+This is an assignment to deploy a Mediawiki stack. For this, we have used a Autoscaling group for the Web Servers and RDS for the DB instance with an option for Multi-AZ.
 
-Please find the steps below to run the stack -
+You'll find the below files and functions related to the automated deployment process -
+
+#### mediawiki-deployment.yaml
+
+This is the main Cloudformation template to deploy the stack. This can be run with multiple parameters according to the environment.
+
+#### dev-stack-configuration.json & prod-stack-configuration.json
+These are the files which store the parameter values in a key-pair format. These can be modified according to need and before deploying the stack. The configuration files specify the parameter values that your pipeline uses when it creates the dev and production stacks.
+
+#### codepipeline-deployment.yaml
+This is the Cloudformation template to build the AWS Codepipeline to fetch the details from source and then automate the deployment. There will be 3 stages -
+a. Source
+b. Dev stage
+c. Prod stage
+
+The mediawiki-deployment.yaml template gets passed as a parameter for the Codepipeline template, along with the environment configuration files.
+
+The pipeline also has an Amazon SNS task to notify the admin user via mail when the Dev stage is complete, and only once admin approves this will move towards the Prod deploy stage.
+
+Please find the steps below to run the automation -
 
 ###### Step 1 - Sign in to your AWS account and navigate to Cloudformation. Please choose a region where you have existing keypair available.
 
-###### Step 2 - Modify the parameter files - dev-parameters.json and prod-parameters.json according to the values in your region.
+###### Step 2 - Modify the parameter files - dev-stack-configuration.json and prod-stack-configuration.json according to the values for your region.
 
-###### Step 3 - Edit the jenkinsfile as needed
+###### Step 3 - Once the parameters have been updated, create a zip file using mediawiki-deployment.yaml, dev-stack-configuration.json & prod-stack-configuration.json
 
-###### Step 4 - Run the jenkinsfile as a pipeline job
+###### Step 4 - Navigate to S3 under your AWS account and create a bucket (for ex - my-template-repo) and upload the zip file under that bucket.
 
-#### Alternative option -
+###### Step 5 - Modify the codepipeline-parameters.json with values for parameters for the Codepipeline. Values for TemplateFileName, TestStackConfig and ProdStackConfig are updated to the respective file name by default.
 
-###### From the AWS Cloudformation console, select the option "Create Stack". Provide values for parameters and hit "Create Stack"
+###### Step 6 - Use the below AWS CLI command to provision the codepipeline-deployment.yaml template. Please make sure that you are creating the pipeline in the region as your S3 bucket -
+aws cloudformation create-stack --stack-name cp --template-body file://codepipeline-deployment.yml --parameters file://codepipeline-parameters.json
 
-If you have AWS CLI installed on your local machine, you can directly use the following command to create the stack -
+###### Step 7 - Navigate to the CodePipeline console to check the Pipeline steps and progress.
 
-###### Step 1 - Clone the Git repo and edit the parameters.json file with your customized values
+You can find the Mediawiki stack Output URL using the below command -
 
-###### Step 2 - Run the CLI command (edit the parameter values as per region):
-
-###### aws cloudformation create-stack --stack-name devstackname --template-body file://mediawiki-deployment.yaml --parameters file://dev-parameters.json
-
-You can find the output URL using the following command:
-
-###### aws cloudformation --region ap-southeast-2 describe-stacks --stack-name devstackname --query "Stacks[0].Outputs[?OutputKey=='WebsiteURL'].OutputValue" --output text
+###### aws cloudformation --region your-region describe-stacks --stack-name your-stackname --query "Stacks[0].Outputs[?OutputKey=='WebsiteURL'].OutputValue" --output text
