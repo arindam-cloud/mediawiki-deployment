@@ -21,6 +21,9 @@ The mediawiki-deployment.yaml template gets passed as a parameter for the Codepi
 
 The pipeline also has an Amazon SNS task to notify the admin user via mail when the Dev stage is complete, and only once admin approves this will move towards the Prod deploy stage.
 
+#### codepipeline-parameters.json
+This file needs to be updated with the parameter values for the Codepipeline template
+
 Please find the steps below to run the automation -
 
 ###### Step 1 - Sign in to your AWS account and navigate to Cloudformation. Please choose a region where you have existing keypair available.
