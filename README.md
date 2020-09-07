@@ -20,7 +20,7 @@ If you have AWS CLI installed on your local machine, you can directly use the fo
 
 ###### Step 1 - Clone the Git repo and edit the parameters.json file with your customized values
 
-###### Step 2 - Run the CLI command:
+###### Step 2 - Run the CLI command (edit the parameter values as per region):
 
 ###### aws cloudformation create-stack --stack-name devstackname --template-body file://mediawiki-deployment.yaml --parameters file://dev-parameters.json
 
