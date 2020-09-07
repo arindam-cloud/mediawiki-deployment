@@ -1,4 +1,4 @@
-# Deployment Steps
+# Details
 
 This is an assignment to deploy a Mediawiki stack. For this, we have used a Autoscaling group for the Web Servers and RDS for the DB instance with an option for Multi-AZ.
 
@@ -23,6 +23,8 @@ The pipeline also has an Amazon SNS task to notify the admin user via mail when 
 
 #### codepipeline-parameters.json
 This file needs to be updated with the parameter values for the Codepipeline template
+
+## Deployment Steps
 
 Please find the steps below to run the automation -
 
