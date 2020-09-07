@@ -391,6 +391,8 @@ Resources:
     Type: 'AWS::ElasticLoadBalancingV2::LoadBalancer'
     Properties:
       Subnets: !Ref Subnets
+      SecurityGroups: 
+        - !Ref LBSecurityGroup
   ALBListener:
     Type: 'AWS::ElasticLoadBalancingV2::Listener'
     Properties:
@@ -590,6 +592,16 @@ Resources:
           FromPort: '3306'
           ToPort: '3306'
           SourceSecurityGroupId: !Ref WebServerSecurityGroup
+      VpcId: !Ref VpcId
+  LBSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: ELB security group
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          CidrIp: 0.0.0.0/0
+          FromPort: 0
+          ToPort: 65535
       VpcId: !Ref VpcId
   MySQLDatabase:
     Type: 'AWS::RDS::DBInstance'
